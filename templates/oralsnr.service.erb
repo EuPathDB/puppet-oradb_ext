@@ -1,0 +1,17 @@
+# This file is managed by Puppet <%= @name %>
+# /usr/lib/systemd/system/oralsnr.service
+#
+# Manage Oracle listener service.
+
+[Unit]
+Description=Oracle listener
+After=network.target
+ 
+[Service]
+Type=forking
+ExecStart=<%= @oracle_home %>/bin/lsnrctl start
+ExecStop=<%= @oracle_home %>/bin/lsnrctl stop
+User=oracle
+ 
+[Install]
+WantedBy=multi-user.target

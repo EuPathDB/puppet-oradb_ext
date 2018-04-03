@@ -1,0 +1,17 @@
+# This file is managed by Puppet <%= @name %>
+# /usr/lib/systemd/system/oradb.service
+#
+# Manage Oracle database services. Depends on oralsnr.
+
+[Unit]
+Description=Oracle databases service
+After=network.target oralsnr.service
+ 
+[Service]
+Type=forking
+ExecStart=<%= @oracle_home %>/bin/dbstart <%= @oracle_home %>
+ExecStop=<%= @oracle_home %>/bin/dbshut <%= @oracle_home %>
+User=oracle
+ 
+[Install]
+WantedBy=multi-user.target
